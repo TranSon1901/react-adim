@@ -1,6 +1,5 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
 import { Link,useLocation} from "react-router-dom";
 import { useState } from "react";
 import UseFetch from "../../hooks/UseFetch";
@@ -15,7 +14,6 @@ const Datatable = ({columns}) => {
   const {data, error, loading}= UseFetch(`/${path}`)
 
   const handleDelete = async (id) => {
-    console.log(id)
     try {
       await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
@@ -48,6 +46,9 @@ const Datatable = ({columns}) => {
     },
   ];
   return (
+    <>
+    {
+    loading ? ('loading await please'):
     <div className="datatable">
       <div className="datatableTitle">
         Add New User
@@ -65,6 +66,8 @@ const Datatable = ({columns}) => {
         getRowId={row=>row._id}
       />
     </div>
+    }
+    </>
   );
 };
 

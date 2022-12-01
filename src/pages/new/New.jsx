@@ -3,10 +3,31 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-
+import axios from "axios";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+  const [info, setInfo] = useState({
+    Username:undefined,
+    Email:undefined,
+    Phone:undefined,
+    Password:undefined,
+    Address:undefined,
+    Country:undefined
+  });
 
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+ 
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {  
+      await axios.post("/auth/register", info);
+    } catch (err) {
+      console.log("not create");
+    }
+  };
+   console.log(info)
   return (
     <div className="new">
       <Sidebar />
@@ -43,10 +64,14 @@ const New = ({ inputs, title }) => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} />
+                  <input  
+                  onChange={handleChange}
+                  id={input.label}
+                  type={input.type} 
+                  placeholder={input.placeholder} />
                 </div>
               ))}
-              <button>Send</button>
+              <button  onClick={handleClick}>Send</button>
             </form>
           </div>
         </div>
