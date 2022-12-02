@@ -6,14 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
-  const [info, setInfo] = useState({
-    Username:undefined,
-    Email:undefined,
-    Phone:undefined,
-    Password:undefined,
-    Address:undefined,
-    Country:undefined
-  });
+  const [info, setInfo] = useState({});
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -66,7 +59,7 @@ const New = ({ inputs, title }) => {
                   <label>{input.label}</label>
                   <input  
                   onChange={handleChange}
-                  id={input.label}
+                  id={input.id}
                   type={input.type} 
                   placeholder={input.placeholder} />
                 </div>

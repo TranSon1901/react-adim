@@ -17,7 +17,9 @@ const Datatable = ({columns}) => {
     try {
       await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
-    } catch (err) {}
+    } catch (err) {
+
+    }
   };
 
   useEffect(()=>{
@@ -51,8 +53,8 @@ const Datatable = ({columns}) => {
     loading ? ('loading await please'):
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
+        Add New {path}
+        <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
       </div>
